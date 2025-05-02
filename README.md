@@ -20,7 +20,7 @@ This repository contains code for motion prediction tasks using the inD dataset.
    (2). **Preprocess raw geometry data**
       - Run `geometry_process3.py` to extract and process geometry data,
 
-`  (3). **Preprocess and combine tracking and geometry data**
+   (3). **Preprocess and combine tracking and geometry data**
       - Run `data_process2.py` to preprocess and reorganize the tracking data, and combine geometry data into the required format.
       - This also split all data samples into training, validation and testing sets.
 
