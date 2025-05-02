@@ -181,7 +181,7 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
         num_node = len(node_id)
         # node_type records the type of ways (encoded) where nodes are located
         node_type = -1 * np.ones(num_node)
-        # node_id records the id of ways (encoded) where nodes are located
+        # vector_id records the id of ways (encoded) where nodes are located
         vector_id = [np.array([], dtype=object) for _ in range(num_node)]
 
         """
