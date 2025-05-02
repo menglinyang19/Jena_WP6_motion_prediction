@@ -4,6 +4,8 @@ This repository contains code for motion prediction tasks using the inD dataset.
 
 ## 🚦 How to Use
 
+**Important:** Before running any code, make sure to replace all occurrences of `<your_path>` in the code files with the correct path to your local data and configuration files.
+
 1. **Prepare Your Environment**  
    Use Python 3.10+ and install required packages (`requirements.txt` is provided):
 
@@ -24,21 +26,16 @@ This repository contains code for motion prediction tasks using the inD dataset.
       - Run `data_process2.py` to preprocess and reorganize the tracking data, and combine geometry data into the required format.
       - This also split all data samples into training, validation and testing sets.
 
+3. **Step 3: Run Pre-rendering**
+    - Run `prerender_inD.py` to pre-render the data for further model training.
+    - Run the file on the training, validation, and testing sets separately. 
 
-   3. **(Optional) Visualize scenes**
-      - Run `render_scenes.py` to generate trajectory or scene visualizations for inspection.
-      - This step is optional but helpful for debugging or understanding the dataset.
-        ```bash
-        python render_scenes.py
-        ```
+4. **Step 4: Train the model**
+     - Run `train.py` with the training and validation sets. 
+ 
+4. **Step 5: Access the trained model **
+     - Run `predict.py` on the testing sets and get result files of each prediction scenario.
+     - Run `predict.py` 
 
-   4. **Update file paths**
-      - In all scripts, replace placeholder paths like `<your_path>/validation` with your actual local directory.
-      - Example:
-        ```python
-        data_path = "/home/yourname/inD_data/validation"
-        ```
-
-   5. **Verify file structure**
-      - Make sure all necessary intermediate files have been generated and placed in the expected directories.
+  
   
