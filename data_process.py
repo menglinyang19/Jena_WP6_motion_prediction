@@ -64,18 +64,17 @@ def reorganize_data_10Hz(origin_meta_data, origin_agents_data, num_agents):
     
     return concatenated_array, new_agents_data, new_meta_data
 
-# Load vehicle data from the csv file
-agent_data_dictionary = '/home/meya174e/bin/inD_data/original_data/'
-location_dictionary = '/home/meya174e/bin/inD_data/lanelets/'
-output_dictionary = '/home/meya174e/bin/inD_data/10Hz_data/'
+# original agent tracking data in csv format
+agent_data_dictionary = '<your_path>/inD_data/original_data/'
+# original lanelet data in xml format
+location_dictionary = '<your_path>/inD_data/lanelets/'
+# where to save the primarily processed agent tracking data
+output_dictionary = '<your_path>/inD_data/10Hz_data/'
 
 # Set up warning to be triggered as an exception
 warnings.filterwarnings("error", category=np.VisibleDeprecationWarning)
 
-total_samples = 0
-training_prob = 0.7
-validation_prob = 0.3
-
+# totol 33 tracking data collection scenarios
 for i in range(0, 33):
     meta_filename = f"{i:02d}_tracksMeta.csv"
     meta_filepath = os.path.join(agent_data_dictionary, meta_filename)

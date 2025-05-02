@@ -127,18 +127,21 @@ def create_vehicle_animation_prediction(ax, vehicle_data, prediction_info):
     return ani
 
 
-source_directory = "/home/meya174e/bin/inD_data/model_0802/predict_result"
-destination_directory = "/home/meya174e/bin/inD_data/model_0802/visualization_dynamic/"
-testing_directory = "/home/meya174e/bin/inD_data/model_0802/testing_processed"
+# The predict result directory
+source_directory = "<your_path>/predict_result"
+# The directory where the plots will be saved
+destination_directory = "/<your_path>/visualization_dynamic/"
+# The data from testing set is used to provide geometry information
+testing_directory = "<your_path>/testing_processed"
 
 # Ensure the destination directory exists
 os.makedirs(destination_directory, exist_ok=True)
 
-# Specify the filename text file of testing files
-testing_file = "/home/meya174e/bin/inD_data/model_0802/testing_filenames.txt"
+# This file includes all the testing data filenames used for predictions.
+testing_file = "<your_path>/testing_filenames.txt"
 
-# write the selected filenames into a txt file
-result_file = "/home/meya174e/bin/inD_data/model_0802/illustration_filenames.txt"
+# This file contains a subset of testing files chosen specifically for illustration purposes.
+result_file = "<your_path>/illustration_filenames.txt"
 
 #with open(input_file, 'w') as f:
 #    for filename in os.listdir(input_directory):

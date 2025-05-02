@@ -12,14 +12,16 @@ import itertools
 import pdb
 
 def main():
-    data_path = "/home/meya174e/bin/inD_data/model_0802/validation"
-    output_path = os.path.join('/home/meya174e/bin/inD_data/model_0802/validation_processed')
+    # original data needed to be prerendered
+    data_path = "<your_path>/validation"  # change to 'training' or 'testing' as needed 
+    # where to save the prerendered data
+    output_path = os.path.join('<your_path>/validation_processed') # change to 'training_processed' or 'testing_processed' as needed 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-    n_jobs = 10
+    n_jobs = 24
     n_shards = 1
-    shard_id = 2
-    config = "/home/meya174e/bin/Multipath++/inD_data/configs/prerender.yaml"       
+    shard_id = 0
+    config = "<your_path>/configs/prerender.yaml"       
     # the arguments will be passed to the script
     dataset = create_dataset(data_path, n_shards, shard_id)
 

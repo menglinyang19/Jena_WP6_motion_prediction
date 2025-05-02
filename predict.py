@@ -60,9 +60,9 @@ class AgentFilter:
         return "left_turn"
 
 # Specify the path to the .pth file
-file_path = "/home/meya174e/bin/Multipath++/inD_data/last.pth" # trained model
+file_path = "<your_path>/last.pth" # your trained model
 
-config_path = "/home/meya174e/bin/Multipath++/inD_data/configs/final_RoP_Cov_A_fMCG.yaml"
+config_path = "<your_path>/configs/final_RoP_Cov_A_fMCG.yaml"    # the same config file used for training
 config = get_config(config_path)
 
 model = MultiPathPP(config["model"])
@@ -83,11 +83,11 @@ dataloader = get_dataloader(config["predict"]["data_config"])
 pbar = tqdm(dataloader)
 
 # Create a directory to store the NPZ files
-output_dir = "/home/meya174e/bin/inD_data/model_0802/predict_result"
+output_dir = "<your_path>/predict_result"
 os.makedirs(output_dir, exist_ok=True)
 
 # Open the error log file in append mode
-error_log_file = "/home/meya174e/bin/inD_data/model_0802/error_predict.txt"
+error_log_file = "<your_path>/error_predict.txt"
 with open(error_log_file, "a") as error_log:
 
 #for i, data in enumerate(islice(pbar, 500)):

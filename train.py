@@ -38,12 +38,12 @@ def get_last_file(path):
     return latest_file
 
 #config = get_config(sys.argv[1])
-config_path = "/home/meya174e/bin/Multipath++/inD_data/configs/final_RoP_Cov_A_fMCG.yaml"
+config_path = "<your_path>/configs/final_RoP_Cov_A_fMCG.yaml"  # change to final_RoP_Cov_Single.yaml or your config file
 if len(sys.argv) > 1:
     config_path = sys.argv[1]
 config = get_config(config_path)
 #alias = sys.argv[1].split("/")[-1].split(".")[0]
-models_path = "/home/meya174e/bin/Multipath++/inD_data/"
+models_path = "<>your_path>/models"  # change to your path
 last_checkpoint = get_last_file(models_path)
 dataloader = get_dataloader(config["train"]["data_config"])
 val_dataloader = get_dataloader(config["val"]["data_config"])

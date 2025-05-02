@@ -267,11 +267,12 @@ def get_agent_data(new_agents_data, new_meta_data, num_agents):
 
     return dynamic_data_10Hz, average_prediction_counts, average_non_stationary_counts, sum(prediction_counts)
 
-# Load vehicle data from the csv file
-agent_data_dictionary = '/home/meya174e/bin/inD_data/original_data/'
-location_dictionary = '/home/meya174e/bin/inD_data/lanelets/'
-newdata_dictionary = '/home/meya174e/bin/inD_data/10Hz_data/'
+agent_data_dictionary = '<your_path>/inD_data/original_data/'
+location_dictionary = '<your_path>/inD_data/lanelets/'
+# processed data from data_process.py
+newdata_dictionary = '<your_path>/inD_data/10Hz_data/'
 
+# processed geometry data from geometry_process3.py
 geometry_filename = 'geometry_info6.npz'
 geometry_filepath= os.path.join(location_dictionary, geometry_filename)
 geometry_data = np.load(geometry_filepath, allow_pickle=True)
@@ -286,7 +287,8 @@ output_filename = 'agents_num.txt'
 output_filepath= os.path.join(newdata_dictionary, output_filename)
 with open(output_filepath, 'w') as file:
     data_sample = []
-    # Assuming you have a loop over 33 tracks or iterations
+    # This loop processes 33 tracks to calculate and log the average number of non-stationary agents
+    # and the average number of agents selected for prediction in each track.
     for i in range(0, 33):
         meta_filename = f"{i:02d}_tracksMeta.csv"
         meta_filepath = os.path.join(agent_data_dictionary, meta_filename)
@@ -322,7 +324,7 @@ with open(output_filepath, 'w') as file:
         dynamic_data_10Hz, average_prediction_counts, average_non_stationary_counts,total_predition = get_agent_data(new_agents_data, new_meta_data, num_agents)
         data_sample.append(total_predition)
         
-        # Write the printout statements to the file
+        # Write the statistics for each track to the output file
         file.write(f"track{i}, non_stationary: {average_non_stationary_counts}, prediction: {average_prediction_counts}\n")
 
         if dynamic_data_10Hz is not None:

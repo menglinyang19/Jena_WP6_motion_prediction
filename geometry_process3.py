@@ -1,9 +1,11 @@
-# This version is to fix all the lines in the geometry data along with added centerlines based on geometry_process1.py
+# This script processes geometry data to extract all lines, including added centerlines from lanelets,
+# and formats the data to match the Waymo dataset structure for use in the Multipath++ algorithm.
 #   1. for nodes belonging to different segments, recording them seperately as different nodes
 #   2. when create Lanecenters, their directions should be consistent with the right-side way
 #   3. creating lanecenters for all lanelets(check first)
 #   4. iterate through regulatory_element and multipolygon first, lanelet then, to encode ways. 
 #   5. re-order the sequence of recording nodes
+
 import numpy as np
 import math
 import xml.etree.ElementTree as ET
@@ -179,9 +181,9 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
         node_xyz = np.array(node_xyz)
         
         num_node = len(node_id)
-        # node_type records the type of ways (encoded) where nodes are located
+        # node_type records the type of ways (encoded) where nodes are located according to the encoding rule of Waymo dataset
         node_type = -1 * np.ones(num_node)
-        # node_id records the id of ways (encoded) where nodes are located
+        # vector_id records the id of ways (encoded) where nodes are located
         vector_id = [np.array([], dtype=object) for _ in range(num_node)]
 
         """
@@ -198,6 +200,7 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
             way_id.append(way.get('id'))
         way_id = np.array(way_id).reshape(-1,1)
         num_way = way_id.shape[0]
+        # way_type records the type of each way (path) based on the encoding rules
         way_type = -1 * np.ones(num_way)
 
         # initiate the records of new nodes created to form lane centers
@@ -384,7 +387,7 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
                 empty_indices.append(i)
         vector_id = np.array(vector_id).reshape(-1,1)
 
-        # combine the original nodes and new created nodes
+        # combine the original nodes and newly created nodes, corresponding to the same format as the Waymo dataset
         combined_node_id = np.concatenate((sorted_node_id, new_node_id), axis=0)
         combined_node_xyz = np.concatenate((sorted_node_xyz, new_node_xyz), axis=0)
         combined_vector_id = np.concatenate((sorted_vector_id, new_vector_id), axis=0)
@@ -400,11 +403,12 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
             f"combined_node_type: {combined_node_type.shape}, "
             f"combined_node_valid: {combined_node_valid.shape}"
         )
-        combined_node_valid[combined_node_type > 0] = 1  # Set to 0 where combined_node_type is valid (not -1)
+        combined_node_valid[combined_node_type > 0] = 1  # Set to 1 where combined_node_type is valid (greater than 0)
         # Iterate over the indices of empty elements in vector_id
         for i in empty_indices:
             combined_node_valid[i] = 0  # Set the corresponding position in combined_node_valid to 0
 
+        #  combine the original nodes and new created nodes, corresponding to the same fromat as the Waymo dataset
         node_info_j = {
             "roadgraph_samples_node/id": combined_node_id,
             "roadgraph_samples/id": combined_vector_id,
@@ -416,7 +420,7 @@ def get_geometry_data(agent_data_dictionary,location_dictionary):
         key_location = f"Location_{j+1}"
         node_info[key_location] = node_info_j
 
-    location_dictionary = '/home/meya174e/bin/inD_data/lanelets/'
+    location_dictionary = '<your_path>/inD_data/lanelets/'
     geometry_filename = "geometry_info6.npz"
     geometry_filepath = os.path.join(location_dictionary, geometry_filename)
     np.savez(geometry_filepath, **node_info)

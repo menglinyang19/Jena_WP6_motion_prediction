@@ -28,15 +28,17 @@ def find_and_load_file(testing_file, scenario_id, agent_id, folder_path):
     return None
 
 
-source_directory = "/home/meya174e/bin/inD_data/model_0802/predict_result"
-destination_directory = "/home/meya174e/bin/inD_data/model_0802/visualization_static/"
-testing_directory = "/home/meya174e/bin/inD_data/model_0802/testing_processed"
+# specify the prediction result directory
+source_directory = "<your_path>/predict_result"
+destination_directory = "<your_path>/visualization_static/"
+# The data from testing set is used to provide geometry information
+testing_directory = "<your_path>/testing_processed"
 
 # Ensure the destination directory exists
 os.makedirs(destination_directory, exist_ok=True)
 
 # Specify the filename text file of testing files
-testing_file = "/home/meya174e/bin/inD_data/model_0802/testing_filenames.txt"
+testing_file = "<your_path>/testing_filenames.txt"
 
 """
 # Get the list of filenames in the directory
@@ -61,8 +63,8 @@ for filename in os.listdir(source_directory):
 
 """
 
-# Write the selected filenames into a txt file
-result_file = "/home/meya174e/bin/inD_data/model_0802/illustration_filenames.txt"
+# This file contains a subset of testing files chosen specifically for illustration purposes.
+result_file = "<your_path>/illustration_filenames.txt"
 """
 with open(result_file, 'w') as f:
     # Extract 1% of files for each atype
