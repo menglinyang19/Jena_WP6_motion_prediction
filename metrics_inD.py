@@ -454,7 +454,7 @@ print(f" mAP_by_bucket_type: {AP_by_bucket_type}")
 
 
 # Save variables to NPZ file
-np.savez("/home/meya174e/bin/inD_data/model_0802/matrics_inD.npz",
+np.savez("<your_path>/matrics_inD.npz",
          overall_miss_rates=overall_miss_rates,
          miss_rates_by_agent_type=miss_rates_by_agent_type,
          overall_min_de=overall_min_de,
@@ -465,7 +465,7 @@ np.savez("/home/meya174e/bin/inD_data/model_0802/matrics_inD.npz",
          AP_by_bucket_type=AP_by_bucket_type
          )
 
-excel_file = '/home/meya174e/bin/inD_data/model_0802/matrics_inD.xlsx'
+excel_file = '<your_path>/matrics_inD.xlsx'
 
 # transform to DataFrame
 df1 = pd.DataFrame.from_dict(overall_miss_rates, orient='index', columns=['Overall_miss_rate'])
